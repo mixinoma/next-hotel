@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* Your other global styles (if any) go below */
+@theme {
+  /* Primary - Mystic Teal Shadows */
+  --color-primary-50: #edf7f6; /* pale mist */
+  --color-primary-100: #d2e7e4;
+  --color-primary-200: #a3c9c5;
+  --color-primary-300: #74aba5;
+  --color-primary-400: #4e9188;
+  --color-primary-500: #2f6d6b; /* deep enchanted teal */
+  --color-primary-600: #245655;
+  --color-primary-700: #1a3f40;
+  --color-primary-800: #10292a;
+  --color-primary-900: #081515; /* shadowy mystery */
+  --color-primary-950: #040b0c;
+
+  /* Accent - Magical Violet Glow */
+  --color-accent-50: #faf5fc;
+  --color-accent-100: #f0e0f5;
+  --color-accent-200: #d8b9ea;
+  --color-accent-300: #c091de;
+  --color-accent-400: #a46acf;
+  --color-accent-500: #8244b8; /* glowing violet */
+  --color-accent-600: #683395;
+  --color-accent-700: #502570;
+  --color-accent-800: #391a4c;
+  --color-accent-900: #1f0d27; /* deep mystical shadow */
+  --color-accent-950: #120715;
+}
+
+@layer components {
+  .spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid theme("colors.primary.900");
+    border-right-color: theme("colors.primary.200");
+    animation: rotate 1s infinite linear;
+  }
+
+  .spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid theme("colors.primary.200");
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+/* For data picker */
+.rdp {
+  --rdp-cell-size: 32px !important;
+  --rdp-accent-color: theme("colors.accent.500") !important;
+  --rdp-background-color: theme("colors.accent.600") !important;
+  margin: 0 !important;
+}
