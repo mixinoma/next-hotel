@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "app/_components/Header.js"
+    "app/_components/Header.js",
+    "app/_components/ReservationCard.jsx"
   ],
   "exclude": ["node_modules"]
 }
