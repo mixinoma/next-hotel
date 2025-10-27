@@ -4,12 +4,12 @@ import TextExpander from "./TextExpander";
 type GetCabinsPropsType = {
   cabin: {
     id: number;
-    name: number;
+    name: string;
     maxCapacity: number;
     regularPrice: number;
     discount: number;
     image: string;
-    description: string;
+    description?: string;
   };
 };
 export default function Cabin({ cabin }: GetCabinsPropsType) {
@@ -32,7 +32,7 @@ export default function Cabin({ cabin }: GetCabinsPropsType) {
         </h3>
 
         <p className="text-lg text-primary-300 mb-10">
-          <TextExpander children={description} />
+          <TextExpander>{description ?? ""}</TextExpander>
         </p>
 
         <ul className="flex flex-col gap-4 mb-7">

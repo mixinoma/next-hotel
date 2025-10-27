@@ -1,46 +1,53 @@
 "use client";
 
+import { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 export default function Filter() {
   const search = useSearchParams();
-  //   console.log(search + "from next");
   const router = useRouter();
   const pathname = usePathname();
-  const activeFilter = search?.get?.("capacity") ?? "all";
+
+  const activeFilter = search?.get("capacity") ?? "all";
+
   function handleFilter(filter: string) {
     const params = new URLSearchParams(search);
-    // console.log(params + "from browser");
-
     params.set("capacity", filter);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    router.replace(`${pathname}?${params.toString()}` as unknown as Route, {
+      scroll: false,
+    });
   }
 
   return (
-    <div className="border border-primary-800 flex ">
+    <div className="border border-primary-800 flex">
       <Button
         handleFilter={handleFilter}
-        filter={"all"}
+        filter="all"
         activeFilter={activeFilter}
-        children={"All cabins"}
-      />
+      >
+        All cabins
+      </Button>
       <Button
         handleFilter={handleFilter}
-        filter={"small"}
+        filter="small"
         activeFilter={activeFilter}
-        children={"1-3 guests"}
-      />
+      >
+        1-3 guests
+      </Button>
       <Button
         handleFilter={handleFilter}
-        filter={"medium"}
+        filter="medium"
         activeFilter={activeFilter}
-        children={"3-7guests"}
-      />
+      >
+        3-7 guests
+      </Button>
       <Button
         handleFilter={handleFilter}
-        filter={"large"}
+        filter="large"
         activeFilter={activeFilter}
-        children={"8-12 guests"}
-      />
+      >
+        8-12 guests
+      </Button>
     </div>
   );
 }
@@ -54,7 +61,7 @@ function Button({
   filter: string;
   handleFilter: (filter: string) => void;
   activeFilter: string;
-  children: string;
+  children: React.ReactNode;
 }) {
   return (
     <button

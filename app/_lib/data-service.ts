@@ -6,13 +6,14 @@ import { notFound } from "next/navigation";
 import { supabase } from "./supabse";
 type GetCabinsPropsType = {
   id: number;
-  name: number;
+  name: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
   image: string;
-  description: string;
+  description?: string; // 👈 make optional
 };
+
 export async function getCabin(id: number): Promise<GetCabinsPropsType> {
   const { data, error } = await supabase
     .from("cabins")
@@ -20,16 +21,12 @@ export async function getCabin(id: number): Promise<GetCabinsPropsType> {
     .eq("id", id)
     .single();
 
-  // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
-
   if (error) {
     console.error(error);
-
     notFound();
   }
 
-  return data;
+  return { ...data, description: data?.description ?? "" };
 }
 
 export async function getCabinPrice(id: number) {

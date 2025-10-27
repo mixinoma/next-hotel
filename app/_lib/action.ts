@@ -11,6 +11,9 @@ export async function updateGuest(formData: any) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
 
+  const guestId = Number(session.user?.guestId);
+  if (!guestId) throw new Error("Invalid guest ID");
+
   const nationalID = formData.get("nationalID");
   const [nationality, countryFlag] = formData.get("nationality").split("%");
 
@@ -18,13 +21,11 @@ export async function updateGuest(formData: any) {
     throw new Error("Please provide a valid national ID");
 
   const updateData = { nationality, countryFlag, nationalID };
-  console.log("Session:", session);
-  console.log("Update data:", updateData);
 
   const { error } = await supabase
     .from("guests")
     .update(updateData)
-    .eq("id", session?.user?.guestId);
+    .eq("id", guestId);
 
   if (error) throw new Error("Guest could not be updated");
 
@@ -35,7 +36,10 @@ export async function deleteReservation({ bookingId }: { bookingId: number }) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
 
-  const guestBookings = await getBookings(session?.user?.guestId);
+  const guestId = Number(session.user?.guestId);
+  if (!guestId) throw new Error("Invalid guest ID");
+
+  const guestBookings = await getBookings(guestId);
   const getBookingIds = guestBookings.map((booking) => booking.id);
 
   if (!getBookingIds.includes(bookingId)) {
@@ -56,12 +60,13 @@ export async function deleteReservation({ bookingId }: { bookingId: number }) {
 export async function updateBooking(formData: any) {
   const bookingId = Number(formData.get("bookingId"));
 
-  // 1) Authentication
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
 
-  // 2) Authorization
-  const guestBookings = await getBookings(session?.user?.guestId);
+  const guestId = Number(session.user?.guestId);
+  if (!guestId) throw new Error("Invalid guest ID");
+
+  const guestBookings = await getBookings(guestId);
   const guestBookingIds = guestBookings.map((booking) => booking.id);
 
   if (!guestBookingIds.includes(bookingId))
