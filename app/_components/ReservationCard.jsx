@@ -8,7 +8,7 @@ export const metadata = {
     title: "Reservations",
   },
 };
-export const formatDistanceFromNow = (dateStr: any) =>
+export const formatDistanceFromNow = (dateStr) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
