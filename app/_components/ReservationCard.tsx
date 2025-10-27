@@ -8,12 +8,12 @@ export const metadata = {
     title: "Reservations",
   },
 };
-export const formatDistanceFromNow = (dateStr) =>
+export const formatDistanceFromNow = (dateStr: any) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
-function ReservationCard({ booking }) {
+function ReservationCard({ booking: any }) {
   const {
     id,
     guestId,
