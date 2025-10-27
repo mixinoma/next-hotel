@@ -5,7 +5,7 @@ import Link from "next/link";
 type CabinPropsType = {
   cabin: {
     id: number;
-    name: number;
+    name: string;
     maxCapacity: number;
     regularPrice: number;
     discount: number;
