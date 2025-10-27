@@ -70,5 +70,7 @@ export default function ({
 function Button() {
   const { pending } = useFormStatus();
 
-  return <SubmitButton pendingLabel={pending}>update Profile</SubmitButton>;
+  return (
+    <SubmitButton pendingLabel={`${pending}`}>update Profile</SubmitButton>
+  );
 }
